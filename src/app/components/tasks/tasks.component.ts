@@ -10,6 +10,7 @@ import { Task } from '../../Task';
 export class TasksComponent implements OnInit {
   constructor(private taskService: TaskService) {}
   tasks: Task[] = [];
+
   ngOnInit(): void {
     this.taskService.getTasks().subscribe((tasks) => {
       this.tasks = tasks;
@@ -23,9 +24,16 @@ export class TasksComponent implements OnInit {
       });
     });
   }
+
   handleReminderToggle(task: Task) {
     this.taskService.toggleTaskReminder(task).subscribe(() => {
       task.reminder = !task.reminder;
+    });
+  }
+
+  addTaskHandler(task: Task) {
+    this.taskService.addTask(task).subscribe((task) => {
+      this.tasks.push(task);
     });
   }
 }
