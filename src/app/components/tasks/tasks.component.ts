@@ -17,11 +17,15 @@ export class TasksComponent implements OnInit {
   }
 
   handleTaskDelete(task: Task) {
-    console.log(1);
     this.taskService.deleteTask(task).subscribe(() => {
       this.tasks = this.tasks.filter((t) => {
         return t.id !== task.id;
       });
+    });
+  }
+  handleReminderToggle(task: Task) {
+    this.taskService.toggleTaskReminder(task).subscribe(() => {
+      task.reminder = !task.reminder;
     });
   }
 }
