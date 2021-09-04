@@ -15,4 +15,13 @@ export class TasksComponent implements OnInit {
       this.tasks = tasks;
     });
   }
+
+  handleTaskDelete(task: Task) {
+    console.log(1);
+    this.taskService.deleteTask(task).subscribe(() => {
+      this.tasks = this.tasks.filter((t) => {
+        return t.id !== task.id;
+      });
+    });
+  }
 }
